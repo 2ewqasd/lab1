@@ -6,9 +6,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Person
         fields = ['url', 'first_name', 'second_name', 'years_old','mobile_number']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'second_name']
