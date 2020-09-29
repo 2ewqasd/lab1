@@ -12,7 +12,7 @@ class PersonCreateTest(APITestCase):
         """
         Ensure that we can create a new person
         """
-        url = reverse('person:router')
+        url = reverse('person-list')
         data = {"first_name": "Test Gleb",
                 "second_name": "Test Bro",
                 "years_old": 22,
