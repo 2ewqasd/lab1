@@ -82,5 +82,58 @@ class PersonCreateTest(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_delete(self):
+        """
+        Try create and delete the person
+        """
+        url = reverse('person-list')
+        data = {"first_name": "Test Gleb",
+                "second_name": "Test Bro",
+                "years_old": 22,
+                "mobile_number": "88005553535"
+                }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        url = reverse('person-detail', kwargs={"pk": Person.objects.get().pk})
+        self.assertEqual(Person.objects.count(), 1)
+        self.assertEqual(Person.objects.get().first_name, 'Test Gleb')
+        self.assertEqual(Person.objects.get().second_name, 'Test Bro')
+        self.assertEqual(Person.objects.get().years_old, 22)
+        self.assertEqual(Person.objects.get().mobile_number, '88005553535')
+        #delete
+        response = self.client.delete(url, data)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
     
+    def test_PUT(self):
+        """
+        Ensure that we can update 
+        """
+        url = reverse('person-list')
+        data = {"first_name": "Test Gleb",
+                "second_name": "Test Bro",
+                "years_old": 22,
+                "mobile_number": "88005553535"
+                }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        url = reverse('person-detail', kwargs={"pk": Person.objects.get().pk})
+        self.assertEqual(Person.objects.count(), 1)
+        self.assertEqual(Person.objects.get().first_name, 'Test Gleb')
+        self.assertEqual(Person.objects.get().second_name, 'Test Bro')
+        self.assertEqual(Person.objects.get().years_old, 22)
+        self.assertEqual(Person.objects.get().mobile_number, '88005553535')
+        #update
+        data = {"first_name": "1",
+                "second_name": "2",
+                "years_old": 3,
+                "mobile_number": "4"
+                }
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(Person.objects.count(), 1)
+        self.assertEqual(Person.objects.get().first_name, '1')
+        self.assertEqual(Person.objects.get().second_name, '2')
+        self.assertEqual(Person.objects.get().years_old, 3)
+        self.assertEqual(Person.objects.get().mobile_number, '4')
     
+
+        
