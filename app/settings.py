@@ -75,8 +75,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'df6l640lvumgn9',
+        'USER': 'ltnaaypgnoiokp',
+        'PASSWORD': '5e6f210cc801e62051f2aa146a88c18306f2b3160ee0d83a7d4bf630c5f638d7',
+        'HOST': 'ec2-34-236-215-156.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
