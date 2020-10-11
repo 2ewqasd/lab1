@@ -1,11 +1,9 @@
-from django.test import TestCase
-
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 from .models import Person
+
 
 class PersonCreateTest(APITestCase):
     def test_create_person(self):
@@ -22,12 +20,12 @@ class PersonCreateTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         url = reverse('person-detail', kwargs={"pk": Person.objects.get().pk})
         self.assertEqual(Person.objects.count(), 1)
-        #miss test location. have a quetion
+        # miss test location. have a quetion
         self.assertEqual(Person.objects.get().first_name, 'Test Gleb')
         self.assertEqual(Person.objects.get().second_name, 'Test Bro')
         self.assertEqual(Person.objects.get().years_old, 22)
         self.assertEqual(Person.objects.get().mobile_number, '88005553535')
-    
+
     def test_wrong_age(self):
         """
         Ensure that wrong age create error
@@ -41,7 +39,7 @@ class PersonCreateTest(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    #i tried to test negative age but i need some advice 
+    # i tried to test negative age but i need some advice
     
     def test_wrong_first_name(self):
         """
@@ -100,13 +98,13 @@ class PersonCreateTest(APITestCase):
         self.assertEqual(Person.objects.get().second_name, 'Test Bro')
         self.assertEqual(Person.objects.get().years_old, 22)
         self.assertEqual(Person.objects.get().mobile_number, '88005553535')
-        #delete
+        # delete
         response = self.client.delete(url, data)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
     
     def test_PUT(self):
         """
-        Ensure that we can update 
+        Ensure that we can update
         """
         url = reverse('person-list')
         data = {"first_name": "Test Gleb",
@@ -122,7 +120,7 @@ class PersonCreateTest(APITestCase):
         self.assertEqual(Person.objects.get().second_name, 'Test Bro')
         self.assertEqual(Person.objects.get().years_old, 22)
         self.assertEqual(Person.objects.get().mobile_number, '88005553535')
-        #update
+        # update
         data = {"first_name": "1",
                 "second_name": "2",
                 "years_old": 3,
@@ -134,6 +132,3 @@ class PersonCreateTest(APITestCase):
         self.assertEqual(Person.objects.get().second_name, '2')
         self.assertEqual(Person.objects.get().years_old, 3)
         self.assertEqual(Person.objects.get().mobile_number, '4')
-    
-
-        
