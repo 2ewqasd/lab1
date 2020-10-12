@@ -13,7 +13,7 @@ router.register(r'person', views.UserViewSet)
 # Wire up our API using automatic URL routing.
 urlpatterns = [
     path('', include(router.urls), name='router'),
-    path('api-auth/', include('rest_framework.urls',namespace='rest_framework')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Use the `get_schema_view()` helper to add a `SchemaView` to project URLs.
     #   * `title` and `description` parameters are passed to `SchemaGenerator`.
@@ -26,6 +26,6 @@ urlpatterns = [
     # Route TemplateView to serve Swagger UI template.
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
-        extra_context={'schema_url':'openapi-schema'}
+        extra_context={'schema_url': 'openapi-schema'}
     ), name='swagger-ui'),
 ]
