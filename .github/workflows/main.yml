@@ -17,6 +17,8 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test
+        env:
+          SECRET_KEY: ${{ secrets.LAB1_SECRET_SETTINGS}}
       - name: Lint with flake8
         run: |
           pip install flake8
@@ -30,3 +32,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "lab1by"
           heroku_email : "specforworkwithpeop@gmail.com"
+        
